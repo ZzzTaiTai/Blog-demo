@@ -389,7 +389,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ZzzT/2019/01/14/github页面/" itemprop="url">github页面</a></h1>
+                <a class="post-title-link" href="/ZzzT/2019/01/14/github页面/" itemprop="url">部署github</a></h1>
         
 
         <div class="post-meta">
@@ -441,7 +441,14 @@
       
         
           
-            
+            <p>Git</p>
+<p>###安装 hexo-deployer-git。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<p>###修改配置。<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span> <span class="comment">#https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">[branch]</span> <span class="comment">#published</span></span><br><span class="line"><span class="attr">  message:</span> <span class="string">[message]</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参数	描述</span><br><span class="line">repo	库（Repository）地址</span><br><span class="line">branch	分支名称。如果您使用的是 GitHub 或 GitCafe 的话，程序会尝试自动检测。</span><br><span class="line">message	自定义提交信息 (默认为 Site updated: &#123;&#123; now(<span class="string">'YYYY-MM-DD HH:mm:ss'</span>) &#125;&#125;)</span><br></pre></td></tr></table></figure>
+<p>生成站点文件并推送至远程库。执行hexo clean &amp;&amp; hexo deploy命令。前者清除站点文件，后者重新生成站点文件并将之推送到指定的库分支。（如果您的Hexo是局部安装，则需要执行./node_modules/.bin/hexo clean &amp;&amp; ./node_modules/.bin/hexo deploy。）</p>
+<p>登入 Github/BitBucket/Gitlab，请在库设置（Repository Settings）中将默认分支设置为_config.yml配置中的分支名称。稍等片刻，您的站点就会显示在您的Github Pages中。</p>
+<p>###这一切是如何发生的？<br>当初次新建一个库的时候，库将自动包含一个master分支。请在这个分支下进行写作和各种配置来完善您的网页。当执行hexo deploy时，Hexo会创建或更新另外一个用于部署的分支，这个分支就是_config.yml配置文件中指定的分支。Hexo会将生成的站点文件推送至该分支下，并且完全覆盖该分支下的已有内容。因此，部署分支应当不同于写作分支。（一个推荐的方式是把master作为写作分支，另外使用public分支作为部署分支。）值得注意的是，hexo deploy并不会对本地或远程的写作分支进行任何操作，因此依旧需要手动推送写作分支的所有改动以实现版本控制。此外，如果您的Github Pages需要使用CNAME文件自定义域名，请将CNAME文件置于写作分支的source_dir目录下，只有这样hexo deploy才能将CNAME文件一并推送至部署分支。</p>
+
           
         
       
